@@ -42,7 +42,7 @@
         </button>
         <button
           class="btn btn-outline-danger mr-1"
-          [routerLink]="['/heroe', heroe.id]"
+          (click)="eliminarHeroe(heroe, i)"
         >
           <i class="fas fa-trash"></i>
         </button>

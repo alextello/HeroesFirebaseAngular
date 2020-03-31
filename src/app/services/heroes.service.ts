@@ -41,6 +41,10 @@ export class HeroesService {
     return this.http.get(`${this.url}/heroes/${id}.json`);
   }
 
+  eliminarHeroe(id: string) {
+    return this.http.delete(`${this.url}/heroes/${id}.json`);
+  }
+
   private crearArreglo(heroesObj: object) {
     const heroes: HeroeModel[]  = [];
     if ( heroesObj === null) {
