@@ -25,12 +25,28 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr *ngFor="let heroe of heroes; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ heroe.nombre }}</td>
+      <td>{{ heroe.poder }}</td>
+      <td>
+        <label *ngIf="heroe.vivo" class="badge badge-success">Vivo</label>
+        <label *ngIf="!heroe.vivo" class="badge badge-danger">Muerto</label>
+      </td>
+      <td>
+        <button
+          class="btn btn-outline-info mr-1"
+          [routerLink]="['/heroe', heroe.id]"
+        >
+          <i class="fas fa-pen"></i>
+        </button>
+        <button
+          class="btn btn-outline-danger mr-1"
+          [routerLink]="['/heroe', heroe.id]"
+        >
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

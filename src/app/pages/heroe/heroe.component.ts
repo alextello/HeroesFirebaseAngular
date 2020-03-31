@@ -4,6 +4,9 @@ import { HeroeModel } from 'src/app/models/heroe.model';
 import { HeroesService } from '../../services/heroes.service';
 import Swal from 'sweetalert2';
 import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { timingSafeEqual } from 'crypto';
 
 
 @Component({
@@ -15,9 +18,18 @@ export class HeroeComponent implements OnInit {
   
   heroe = new HeroeModel();
   
-  constructor(private HereosService: HeroesService) { }
+  constructor(private HereosService: HeroesService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id !== 'nuevo') {
+      this.HereosService.getHeroe(id)
+        .subscribe((resp: HeroeModel) => {
+          this.heroe = resp;
+          this.heroe.id = id;
+        });
+    }
   }
   
   guardar(form: NgForm) {
